@@ -55,7 +55,7 @@ public class SubRedditActivity extends Activity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_sub_reddit, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_reddit_list, container, false);
             return rootView;
         }
     }

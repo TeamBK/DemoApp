@@ -15,15 +15,15 @@ import com.detroitlabs.kyleofori.demoapp.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class PlaceholderFragment extends Fragment {
+public class RedditListFragment extends Fragment {
 
-    public PlaceholderFragment() {
+    public RedditListFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_sub_reddit, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_reddit_list, container, false);
         return rootView;
     }
 }
