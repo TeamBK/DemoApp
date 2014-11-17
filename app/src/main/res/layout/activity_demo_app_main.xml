@@ -14,16 +14,20 @@
         android:orientation="vertical"
         android:layout_centerVertical="true">
         <TextView
-            android:text="@string/hello_world"
+            android:text="@string/txt_instructions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/edt_entry"
+            android:hint="@string/edt_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
+            android:id="@+id/btn_submit"
+            android:text="@string/btn_submit"
+            android:textAllCaps="false"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Submit"/>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </RelativeLayout>
