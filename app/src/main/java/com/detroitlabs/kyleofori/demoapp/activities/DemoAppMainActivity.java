@@ -1,12 +1,14 @@
-package com.detroitlabs.kyleofori.demoapp;
+package com.detroitlabs.kyleofori.demoapp.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.detroitlabs.kyleofori.demoapp.R;
 
-public class DemoApp extends Activity {
+
+public class DemoAppMainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
