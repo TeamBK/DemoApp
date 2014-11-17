@@ -2,6 +2,7 @@ package com.detroitlabs.kyleofori.demoapp.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.detroitlabs.kyleofori.demoapp.R;
 
 
 public class DemoAppMainActivity extends Activity {
+    private static final String LOG_TAG = DemoAppMainActivity.class.getSimpleName();
     private EditText edtSubredditName;
     private Button btnSubmit;
 
@@ -24,7 +26,7 @@ public class DemoAppMainActivity extends Activity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //nothing
+                Log.d(LOG_TAG, edtSubredditName.getText().toString());
             }
         });
     }
