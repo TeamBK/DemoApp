@@ -5,6 +5,7 @@ package com.detroitlabs.kyleofori.demoapp.fragments;
  */
 
 import android.app.Fragment;
+import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,7 @@ import com.detroitlabs.kyleofori.demoapp.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class RedditListFragment extends Fragment {
+public class RedditListFragment extends ListFragment {
 
     public RedditListFragment() {
     }

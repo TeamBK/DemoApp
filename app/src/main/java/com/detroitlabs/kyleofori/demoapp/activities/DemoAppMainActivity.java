@@ -1,6 +1,7 @@
 package com.detroitlabs.kyleofori.demoapp.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -27,6 +28,7 @@ public class DemoAppMainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Log.d(LOG_TAG, edtSubredditName.getText().toString());
+                startActivity(new Intent(DemoAppMainActivity.this, SubRedditActivity.class));
             }
         });
     }
