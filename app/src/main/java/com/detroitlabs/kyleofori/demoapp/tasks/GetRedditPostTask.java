@@ -2,6 +2,7 @@ package com.detroitlabs.kyleofori.demoapp.tasks;
 
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
  * Created by kyleofori on 11/18/14.
  */
 public class GetRedditPostTask extends AsyncTask<String, Void, ArrayList<String>> {
+    private static final String LOG_TAG = GetRedditPostTask.class.getSimpleName();
     String jsonText = null;
 
     @Override
@@ -54,6 +56,7 @@ public class GetRedditPostTask extends AsyncTask<String, Void, ArrayList<String>
             }
 
             jsonText = stringBuffer.toString();
+            Log.d(LOG_TAG, jsonText);
         }
         catch (MalformedURLException e) {
             e.printStackTrace();
@@ -75,5 +78,10 @@ public class GetRedditPostTask extends AsyncTask<String, Void, ArrayList<String>
         }
 
         return new ArrayList<String>();
+    }
+
+    @Override
+    protected void onPostExecute(ArrayList<String> strings) {
+        Log.d(LOG_TAG, strings.toString());
     }
 }
