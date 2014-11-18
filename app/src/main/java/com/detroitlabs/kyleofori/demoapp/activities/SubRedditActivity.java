@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.detroitlabs.kyleofori.demoapp.R;
+import com.detroitlabs.kyleofori.demoapp.fragments.RedditListFragment;
 
 public class SubRedditActivity extends Activity {
 
@@ -19,7 +20,7 @@ public class SubRedditActivity extends Activity {
         setContentView(R.layout.activity_sub_reddit);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new RedditListFragment())
                     .commit();
         }
     }
