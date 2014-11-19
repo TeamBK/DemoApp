@@ -59,7 +59,8 @@ public class RedditListFragment extends ListFragment {
         redditPostArrayList.add(dummyPost2);
         redditListAdapter = new RedditListAdapter(getActivity(), R.layout.list_item_reddit_post, redditPostArrayList);
         repeater = new RepeatingPostFetchExecutor(getActivity().getIntent().getStringExtra(DemoAppMainActivity.SUBREDDIT_NAME));
-
+        redditPostArrayList.add(dummyPost1);
+        updatePosts(redditPostArrayList);
 
     }
 
