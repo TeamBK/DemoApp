@@ -5,25 +5,21 @@ package com.detroitlabs.kyleofori.demoapp.fragments;
  */
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.detroitlabs.kyleofori.demoapp.R;
 import com.detroitlabs.kyleofori.demoapp.adapters.RedditListAdapter;
-import com.detroitlabs.kyleofori.demoapp.models.RedditTextPost;
-
-import java.util.ArrayList;
+import com.detroitlabs.kyleofori.demoapp.arraylists.RedditPostArrayList;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class RedditListFragment extends ListFragment {
-    ArrayList<RedditTextPost> redditTextPosts;
+    RedditPostArrayList redditPostArrayList;
     RedditListAdapter redditListAdapter;
 
     public RedditListFragment() {
@@ -43,12 +39,15 @@ public class RedditListFragment extends ListFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        redditTextPosts= new ArrayList<RedditTextPost>();
+/*        redditTextPosts= new ArrayList<RedditTextPost>();
         RedditTextPost dummyPost1 = new RedditTextPost("fake title", "fake author", "no text", "url");
         RedditTextPost dummyPost2 = new RedditTextPost("fake title", "fake author", "no text", "url");
         redditTextPosts.add(dummyPost1);
         redditTextPosts.add(dummyPost2);
-        redditListAdapter = new RedditListAdapter(getActivity(), R.layout.list_item_reddit_post, redditTextPosts);
+        redditListAdapter = new RedditListAdapter(getActivity(), R.layout.list_item_reddit_post, redditTextPosts);*/
+
+        redditPostArrayList = new RedditPostArrayList();
+
 
     }
 }
