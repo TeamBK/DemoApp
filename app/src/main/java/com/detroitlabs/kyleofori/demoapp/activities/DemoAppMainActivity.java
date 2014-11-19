@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.detroitlabs.kyleofori.demoapp.R;
+import com.detroitlabs.kyleofori.demoapp.tasks.GetRedditPostTask;
 
 
 public class DemoAppMainActivity extends Activity {
@@ -28,7 +29,10 @@ public class DemoAppMainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Log.d(LOG_TAG, edtSubredditName.getText().toString());
+                String searchKeyword = edtSubredditName.getText().toString();
                 startActivity(new Intent(DemoAppMainActivity.this, SubRedditActivity.class));
+                GetRedditPostTask getRedditPostTask = new GetRedditPostTask();
+                getRedditPostTask.execute(searchKeyword);
             }
         });
     }
