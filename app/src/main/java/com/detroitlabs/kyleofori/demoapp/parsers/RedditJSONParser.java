@@ -1,5 +1,7 @@
 package com.detroitlabs.kyleofori.demoapp.parsers;
 
+import android.util.Log;
+
 import com.detroitlabs.kyleofori.demoapp.arraylists.RedditPostArrayList;
 import com.detroitlabs.kyleofori.demoapp.models.RedditTextPost;
 
@@ -13,9 +15,10 @@ import org.json.JSONObject;
 public class RedditJSONParser {
     RedditTextPost redditTextPost;
     RedditPostArrayList redditPostArrayList;
-
+    final String LOG_TAG = RedditJSONParser.class.getSimpleName();
 
     public void convertJSONStringToRedditObject(String JSONString) throws JSONException{
+
         redditPostArrayList = new RedditPostArrayList();
         final String redditDataObject = "data";
         final String redditChildrenArray = "children";
@@ -38,6 +41,8 @@ public class RedditJSONParser {
 
             redditTextPost = new RedditTextPost(currentRedditPostTitle, currentRedditPostAuthor,
                     currentRedditPostText, currentRedditPostUrl);
+
+            Log.i(LOG_TAG, redditTextPost.getAuthor());
 
             addNewRedditPostsToArrayList(redditTextPost);
         }
