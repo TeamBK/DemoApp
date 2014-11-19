@@ -12,6 +12,7 @@ import org.json.JSONObject;
 public class RedditJSONParser {
     RedditTextPost redditTextPost;
 
+
     public String convertJSONStringToRedditObject(String JSONString) throws JSONException{
         final String redditDataObject = "data";
         final String redditChildrenArray = "children";
@@ -23,6 +24,11 @@ public class RedditJSONParser {
         JSONObject jsonObject = new JSONObject(JSONString);
         JSONObject jsonDataObject = jsonObject.getJSONObject(redditDataObject);
         JSONArray jsonChildrenArray = jsonDataObject.getJSONArray(redditChildrenArray);
+
+        for(int i = 0; i < jsonChildrenArray.length(); i++){
+            JSONObject currentRedditObject = jsonChildrenArray.getJSONObject(i);
+
+        }
 
     }
 

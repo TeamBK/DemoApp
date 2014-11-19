@@ -5,13 +5,11 @@ package com.detroitlabs.kyleofori.demoapp.fragments;
  */
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.detroitlabs.kyleofori.demoapp.R;
 import com.detroitlabs.kyleofori.demoapp.adapters.RedditListAdapter;
