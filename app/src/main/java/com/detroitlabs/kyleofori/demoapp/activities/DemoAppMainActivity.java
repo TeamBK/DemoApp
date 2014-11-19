@@ -29,10 +29,10 @@ public class DemoAppMainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Log.d(LOG_TAG, edtSubredditName.getText().toString());
-                String searchKeyword = edtSubredditName.getText().toString();
+                String subredditName = edtSubredditName.getText().toString();
                 startActivity(new Intent(DemoAppMainActivity.this, SubRedditActivity.class));
                 GetRedditPostTask getRedditPostTask = new GetRedditPostTask();
-                getRedditPostTask.execute(searchKeyword);
+                getRedditPostTask.execute(subredditName);
             }
         });
     }
