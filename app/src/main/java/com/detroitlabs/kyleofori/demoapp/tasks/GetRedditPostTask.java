@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.detroitlabs.kyleofori.demoapp.arraylists.RedditPostArrayList;
+import com.detroitlabs.kyleofori.demoapp.models.RedditTextPost;
 import com.detroitlabs.kyleofori.demoapp.parsers.RedditJSONParser;
 
 import org.json.JSONException;
@@ -16,17 +17,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by kyleofori on 11/18/14.
  */
-public class GetRedditPostTask extends AsyncTask<String, Void, RedditPostArrayList> {
+public class GetRedditPostTask extends AsyncTask<String, Void, ArrayList<RedditTextPost>> {
     private static final String LOG_TAG = GetRedditPostTask.class.getSimpleName();
     RedditJSONParser redditJSONParser = new RedditJSONParser();
     String jsonText = null;
 
     @Override
-    protected RedditPostArrayList doInBackground(String... strings) {
+    protected ArrayList<RedditTextPost> doInBackground(String... strings) {
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("http")
                 .authority("api.reddit.com")
@@ -93,7 +95,7 @@ public class GetRedditPostTask extends AsyncTask<String, Void, RedditPostArrayLi
     }
 
     @Override
-    protected void onPostExecute(RedditPostArrayList redditPostArrayList) {
+    protected void onPostExecute(ArrayList<RedditTextPost> redditPostArrayList) {
         super.onPostExecute(redditPostArrayList);
     }
 }
