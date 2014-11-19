@@ -9,17 +9,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by kyleofori on 11/18/14.
  */
 public class RedditJSONParser {
     RedditTextPost redditTextPost;
-    RedditPostArrayList redditPostArrayList;
+    ArrayList<RedditTextPost> redditPostArrayList;
     final String LOG_TAG = RedditJSONParser.class.getSimpleName();
 
     public void convertJSONStringToRedditObject(String JSONString) throws JSONException{
 
-        redditPostArrayList = new RedditPostArrayList();
+        redditPostArrayList = new ArrayList<RedditTextPost>();
         final String redditDataObject = "data";
         final String redditChildrenArray = "children";
         final String redditPostAuthor = "author";
@@ -44,16 +46,13 @@ public class RedditJSONParser {
 
             Log.i(LOG_TAG, redditTextPost.getAuthor());
 
-            addNewRedditPostsToArrayList(redditTextPost);
+
+            redditPostArrayList.add(redditTextPost);
         }
 
     }
 
-    public void addNewRedditPostsToArrayList(RedditTextPost redditTextPost){
-        redditPostArrayList.addNewRedditPostToArrayList(redditTextPost);
-    }
-
-    public RedditPostArrayList getRedditTextPostArrayList(){
+    public ArrayList<RedditTextPost> getRedditTextPostArrayList(){
         return redditPostArrayList;
     }
 

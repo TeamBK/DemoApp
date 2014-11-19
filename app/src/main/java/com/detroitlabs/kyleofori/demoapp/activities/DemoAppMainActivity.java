@@ -11,13 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.detroitlabs.kyleofori.demoapp.R;
+import com.detroitlabs.kyleofori.demoapp.backgroundthreadscheduler.RepeatingPostFetchExecutor;
 import com.detroitlabs.kyleofori.demoapp.tasks.GetRedditPostTask;
 
 
 public class DemoAppMainActivity extends Activity {
     private static final String LOG_TAG = DemoAppMainActivity.class.getSimpleName();
+    public static final String SUBREDDIT_NAME = "subredditname";
     private EditText edtSubredditName;
     private Button btnSubmit;
+    RepeatingPostFetchExecutor repeatingTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +32,12 @@ public class DemoAppMainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Log.d(LOG_TAG, edtSubredditName.getText().toString());
-                String searchKeyword = edtSubredditName.getText().toString();
-                startActivity(new Intent(DemoAppMainActivity.this, SubRedditActivity.class));
+                String subredditName = edtSubredditName.getText().toString();
+                Intent intent = new Intent(DemoAppMainActivity.this, SubRedditActivity.class);
+                intent.putExtra(SUBREDDIT_NAME, subredditName);
+                startActivity(intent);
                 GetRedditPostTask getRedditPostTask = new GetRedditPostTask();
-                getRedditPostTask.execute(searchKeyword);
+                getRedditPostTask.execute(subredditName);
             }
         });
     }
