@@ -17,6 +17,7 @@ import com.detroitlabs.kyleofori.demoapp.tasks.GetRedditPostTask;
 
 public class DemoAppMainActivity extends Activity {
     private static final String LOG_TAG = DemoAppMainActivity.class.getSimpleName();
+    public static final String SUBREDDIT_NAME = "subredditname";
     private EditText edtSubredditName;
     private Button btnSubmit;
     RepeatingPostFetchExecutor repeatingTask;
@@ -32,10 +33,11 @@ public class DemoAppMainActivity extends Activity {
             public void onClick(View view) {
                 Log.d(LOG_TAG, edtSubredditName.getText().toString());
                 String subredditName = edtSubredditName.getText().toString();
-                startActivity(new Intent(DemoAppMainActivity.this, SubRedditActivity.class));
+                Intent intent = new Intent(DemoAppMainActivity.this, SubRedditActivity.class);
+                intent.putExtra(SUBREDDIT_NAME, subredditName);
+                startActivity(intent);
                 GetRedditPostTask getRedditPostTask = new GetRedditPostTask();
                 getRedditPostTask.execute(subredditName);
-                repeatingTask = new RepeatingPostFetchExecutor(subredditName);
             }
         });
     }

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.detroitlabs.kyleofori.demoapp.R;
+import com.detroitlabs.kyleofori.demoapp.activities.DemoAppMainActivity;
 import com.detroitlabs.kyleofori.demoapp.adapters.RedditListAdapter;
 import com.detroitlabs.kyleofori.demoapp.arraylists.RedditPostArrayList;
 import com.detroitlabs.kyleofori.demoapp.backgroundthreadscheduler.RepeatingPostFetchExecutor;
@@ -33,7 +34,6 @@ public class RedditListFragment extends ListFragment {
         View rootView = inflater.inflate(R.layout.fragment_reddit_list, container, false);
       //  ListView redditPostList = getListView();
         setListAdapter(redditListAdapter);
-        repeater = new RepeatingPostFetchExecutor("cooking");
      //   redditListAdapter.notifyDataSetChanged();
         return rootView;
     }
@@ -50,6 +50,7 @@ public class RedditListFragment extends ListFragment {
         redditListAdapter = new RedditListAdapter(getActivity(), R.layout.list_item_reddit_post, redditTextPosts);*/
 
         redditPostArrayList = new RedditPostArrayList();
+        repeater = new RepeatingPostFetchExecutor(getActivity().getIntent().getStringExtra(DemoAppMainActivity.SUBREDDIT_NAME));
 
 
     }
