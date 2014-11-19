@@ -2,7 +2,6 @@ package com.detroitlabs.kyleofori.demoapp.parsers;
 
 import android.util.Log;
 
-import com.detroitlabs.kyleofori.demoapp.arraylists.RedditPostArrayList;
 import com.detroitlabs.kyleofori.demoapp.models.RedditTextPost;
 
 import org.json.JSONArray;
