@@ -8,17 +8,20 @@
     <TextView
         android:id="@+id/fragment_single_item_author"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
 
     <TextView
         android:id="@+id/fragment_single_item_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
 
     <TextView
         android:id="@+id/fragment_single_item_description"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
 
     <TextView
         android:id="@+id/fragment_single_item_url"
