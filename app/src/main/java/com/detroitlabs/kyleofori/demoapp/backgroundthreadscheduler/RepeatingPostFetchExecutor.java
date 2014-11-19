@@ -25,8 +25,8 @@ public class RepeatingPostFetchExecutor {
     Runnable periodicTask = new Runnable(){
         @Override
         public void run() {
-            try{
                 Log.i("repeater", "I'm a repeating task, or something like that");
+            try{
 
             }catch (Exception e){
 
