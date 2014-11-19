@@ -12,7 +12,6 @@ import android.widget.EditText;
 
 import com.detroitlabs.kyleofori.demoapp.R;
 import com.detroitlabs.kyleofori.demoapp.backgroundthreadscheduler.RepeatingPostFetchExecutor;
-import com.detroitlabs.kyleofori.demoapp.tasks.GetRedditPostTask;
 
 
 public class DemoAppMainActivity extends Activity {
@@ -36,8 +35,9 @@ public class DemoAppMainActivity extends Activity {
                 Intent intent = new Intent(DemoAppMainActivity.this, SubRedditActivity.class);
                 intent.putExtra(SUBREDDIT_NAME, subredditName);
                 startActivity(intent);
-                GetRedditPostTask getRedditPostTask = new GetRedditPostTask();
-                getRedditPostTask.execute(subredditName);
+                repeatingTask = new RepeatingPostFetchExecutor(subredditName);
+/*                GetRedditPostTask getRedditPostTask = new GetRedditPostTask();
+                getRedditPostTask.execute(subredditName);*/
             }
         });
     }
