@@ -56,13 +56,8 @@ public class RedditListFragment extends ListFragment {
         redditListAdapter = new RedditListAdapter(getActivity(), R.layout.list_item_reddit_post, redditTextPosts);*/
 
         redditPostArrayList = new ArrayList<RedditTextPost>();
-        RedditTextPost dummyPost1 = new RedditTextPost("fake title", "fake author", "no text", "url");
-        RedditTextPost dummyPost2 = new RedditTextPost("fake title", "fake author", "no text", "url");
-        redditPostArrayList.add(dummyPost1);
-        redditPostArrayList.add(dummyPost2);
         redditListAdapter = new RedditListAdapter(getActivity(), R.layout.list_item_reddit_post, redditPostArrayList);
         repeater = new RepeatingPostFetchExecutor(getActivity().getIntent().getStringExtra(DemoAppMainActivity.SUBREDDIT_NAME));
-        redditPostArrayList.add(dummyPost1);
         updatePosts(redditPostArrayList);
 
         postRefreshHandler = new Handler() {
