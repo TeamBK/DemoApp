@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.detroitlabs.kyleofori.demoapp.R;
 import com.detroitlabs.kyleofori.demoapp.activities.DemoAppMainActivity;
 import com.detroitlabs.kyleofori.demoapp.adapters.RedditListAdapter;
-import com.detroitlabs.kyleofori.demoapp.arraylists.RedditPostArrayList;
 import com.detroitlabs.kyleofori.demoapp.backgroundthreadscheduler.RepeatingPostFetchExecutor;
 import com.detroitlabs.kyleofori.demoapp.models.RedditTextPost;
 
