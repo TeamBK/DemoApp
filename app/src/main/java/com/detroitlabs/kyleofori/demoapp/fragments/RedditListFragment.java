@@ -5,13 +5,16 @@ package com.detroitlabs.kyleofori.demoapp.fragments;
  */
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.detroitlabs.kyleofori.demoapp.R;
 import com.detroitlabs.kyleofori.demoapp.activities.DemoAppMainActivity;
@@ -55,13 +58,8 @@ public class RedditListFragment extends ListFragment {
         redditListAdapter = new RedditListAdapter(getActivity(), R.layout.list_item_reddit_post, redditTextPosts);*/
 
         redditPostArrayList = new ArrayList<RedditTextPost>();
-        RedditTextPost dummyPost1 = new RedditTextPost("fake title", "fake author", "no text", "url");
-        RedditTextPost dummyPost2 = new RedditTextPost("fake title", "fake author", "no text", "url");
-        redditPostArrayList.add(dummyPost1);
-        redditPostArrayList.add(dummyPost2);
         redditListAdapter = new RedditListAdapter(getActivity(), R.layout.list_item_reddit_post, redditPostArrayList);
         repeater = new RepeatingPostFetchExecutor(getActivity().getIntent().getStringExtra(DemoAppMainActivity.SUBREDDIT_NAME));
-        redditPostArrayList.add(dummyPost1);
         updatePosts(redditPostArrayList);
 
         postRefreshHandler = new Handler() {
@@ -102,5 +100,21 @@ public class RedditListFragment extends ListFragment {
     private void updatePosts(ArrayList<RedditTextPost> updatedPostsList) {
         redditPostArrayList = updatedPostsList;
         redditListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Bundle bundle = new Bundle();
+        RedditTextPost redditTextPost = redditPostArrayList.get(position);
+        bundle.putParcelable("clickedObject", redditTextPost);
+
+        RedditPostFragment redditPostFragment = new RedditPostFragment();
+        redditPostFragment.setArguments(bundle);
+
+        getFragmentManager().beginTransaction()
+        .replace(R.id.container, redditPostFragment, "post_fragment")
+        .addToBackStack("post_fragment")
+        .commit();
     }
 }
