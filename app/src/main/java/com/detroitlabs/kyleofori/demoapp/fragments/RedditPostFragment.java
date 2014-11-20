@@ -29,9 +29,6 @@ public class RedditPostFragment extends Fragment{
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 
-   //         Bundle bundle = getArguments().getBundle("clickedObject");
-   //         redditTextPost = bundle.getParcelable("clickedObject");
-
             redditTextPost = getArguments().getParcelable("clickedObject");
 
             View rootView = inflater.inflate(R.layout.fragment_single_item, container, false);
@@ -42,8 +39,12 @@ public class RedditPostFragment extends Fragment{
 
             txt_author.setText(redditTextPost.getAuthor());
             txt_title.setText(redditTextPost.getTitle());
-            txt_description.setText(redditTextPost.getText());
-            txt_url.setText(redditTextPost.getUrl());
+            if(redditTextPost.getText().equals("")){
+                txt_url.setText(redditTextPost.getUrl());
+            }
+            else {
+                txt_description.setText(redditTextPost.getText());
+            }
 
             return rootView;
         }
