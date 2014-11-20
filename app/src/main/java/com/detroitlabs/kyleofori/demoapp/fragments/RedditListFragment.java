@@ -5,9 +5,7 @@ package com.detroitlabs.kyleofori.demoapp.fragments;
  */
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.app.ListFragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,7 +17,6 @@ import android.widget.ListView;
 import com.detroitlabs.kyleofori.demoapp.R;
 import com.detroitlabs.kyleofori.demoapp.activities.DemoAppMainActivity;
 import com.detroitlabs.kyleofori.demoapp.adapters.RedditListAdapter;
-import com.detroitlabs.kyleofori.demoapp.arraylists.RedditPostArrayList;
 import com.detroitlabs.kyleofori.demoapp.backgroundthreadscheduler.RepeatingPostFetchExecutor;
 import com.detroitlabs.kyleofori.demoapp.models.RedditTextPost;
 
@@ -112,6 +109,7 @@ public class RedditListFragment extends ListFragment {
 
         RedditPostFragment redditPostFragment = new RedditPostFragment();
         redditPostFragment.setArguments(bundle);
+
 
         getFragmentManager().beginTransaction()
         .replace(R.id.container, redditPostFragment, "post_fragment")

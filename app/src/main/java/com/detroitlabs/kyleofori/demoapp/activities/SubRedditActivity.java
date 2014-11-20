@@ -20,7 +20,7 @@ public class SubRedditActivity extends Activity {
         setContentView(R.layout.activity_sub_reddit);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new RedditListFragment())
+                    .add(R.id.container, new RedditListFragment(), "list_fragment")
                     .commit();
         }
     }
