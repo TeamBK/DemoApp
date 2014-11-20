@@ -7,6 +7,8 @@ package com.detroitlabs.kyleofori.demoapp.fragments;
 import android.app.Activity;
 import android.app.ListFragment;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,7 @@ public class RedditListFragment extends ListFragment {
     ArrayList<RedditTextPost> redditPostArrayList;
     RedditListAdapter redditListAdapter;
     RepeatingPostFetchExecutor repeater;
+    public static Handler postRefreshHandler;
 
     public RedditListFragment() {
     }
@@ -60,6 +63,39 @@ public class RedditListFragment extends ListFragment {
         repeater = new RepeatingPostFetchExecutor(getActivity().getIntent().getStringExtra(DemoAppMainActivity.SUBREDDIT_NAME));
         redditPostArrayList.add(dummyPost1);
         updatePosts(redditPostArrayList);
+
+        postRefreshHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+              //  redditPostArrayList.add(new RedditTextPost("fake title", "fake author", "no text", "url"));
+                redditListAdapter.clear();
+                redditPostArrayList = msg.getData().getParcelableArrayList("array");
+                redditListAdapter.addAll(redditPostArrayList);
+                redditListAdapter.notifyDataSetChanged();
+            }
+        };
+
+//        Runnable runnable = new Runnable() {
+//            public void run() {
+//                try {
+//                    Thread.sleep(10000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                Message msg = postRefreshHandler.obtainMessage();
+//                    			Bundle bundle = new Bundle();
+//
+//                    			bundle.putString("handled_title", "handled title");
+//                                 msg.setData(bundle);
+//
+//                                 postRefreshHandler.sendMessage(msg);
+//
+//            }
+//        };
+
+ //       Thread mythread = new Thread(runnable);
+   //     mythread.start();
 
     }
 
