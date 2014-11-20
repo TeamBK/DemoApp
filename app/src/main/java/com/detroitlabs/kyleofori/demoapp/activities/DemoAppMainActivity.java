@@ -35,7 +35,7 @@ public class DemoAppMainActivity extends Activity {
                 Intent intent = new Intent(DemoAppMainActivity.this, SubRedditActivity.class);
                 intent.putExtra(SUBREDDIT_NAME, subredditName);
                 startActivity(intent);
-                repeatingTask = new RepeatingPostFetchExecutor(subredditName);
+//                repeatingTask = new RepeatingPostFetchExecutor(subredditName);
 /*                GetRedditPostTask getRedditPostTask = new GetRedditPostTask();
                 getRedditPostTask.execute(subredditName);*/
             }

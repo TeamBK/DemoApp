@@ -1,7 +1,11 @@
 package com.detroitlabs.kyleofori.demoapp.parsers;
 
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
+import com.detroitlabs.kyleofori.demoapp.fragments.RedditListFragment;
 import com.detroitlabs.kyleofori.demoapp.models.RedditTextPost;
 
 import org.json.JSONArray;
@@ -17,6 +21,7 @@ public class RedditJSONParser {
     RedditTextPost redditTextPost;
     ArrayList<RedditTextPost> redditPostArrayList;
     final String LOG_TAG = RedditJSONParser.class.getSimpleName();
+
 
     public void convertJSONStringToRedditObject(String JSONString) throws JSONException{
 
@@ -49,7 +54,17 @@ public class RedditJSONParser {
             redditPostArrayList.add(redditTextPost);
         }
 
+        Handler fragmentHandler = RedditListFragment.postRefreshHandler;
+        Message arrayListMessage = fragmentHandler.obtainMessage();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("array", redditPostArrayList);
+        arrayListMessage.setData(bundle);
+        fragmentHandler.sendMessage(arrayListMessage);
+
+
     }
+
+
 
     public ArrayList<RedditTextPost> getRedditTextPostArrayList(){
         return redditPostArrayList;
