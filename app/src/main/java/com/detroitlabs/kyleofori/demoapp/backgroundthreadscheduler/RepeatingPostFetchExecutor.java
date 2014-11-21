@@ -23,7 +23,7 @@ public class RepeatingPostFetchExecutor {
         getRedditPostTask = new GetRedditPostTask(subredditName);
         scheduledThreadPoolExecutor = (ScheduledThreadPoolExecutor)
                 Executors.newScheduledThreadPool(1);
-        scheduledThreadPoolExecutor.scheduleAtFixedRate(getRedditPostTask, 0, 60, TimeUnit.SECONDS);
+        scheduledThreadPoolExecutor.scheduleAtFixedRate(getRedditPostTask, 0, 5, TimeUnit.SECONDS);
     }
 
     public void stopRepeatingPostFetchExecutor(){

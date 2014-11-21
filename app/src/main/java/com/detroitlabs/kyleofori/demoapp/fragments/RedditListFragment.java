@@ -100,7 +100,7 @@ public class RedditListFragment extends ListFragment {
     public void onPause() {
         super.onPause();
         Log.i("onPause", "On Pause Called");
-        //this is where we need to call method to stop api call
+        repeater.stopRepeatingPostFetchExecutor();
     }
 
     @Override
