@@ -42,6 +42,7 @@ public class GetRedditPostTask implements Runnable {
         URL url;
         String line;
         BufferedReader bufferedReader = null;
+        
         try {
             url = new URL(urlString);
             connection = (HttpURLConnection) url.openConnection();
