@@ -37,7 +37,6 @@ public class DemoAppMainActivity extends Activity {
                 intent.putExtra(SUBREDDIT_NAME, subredditName);
                 startActivity(intent);
 
-
             }
         });
     }
