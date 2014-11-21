@@ -14,25 +14,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
 import com.detroitlabs.kyleofori.demoapp.R;
 import com.detroitlabs.kyleofori.demoapp.activities.DemoAppMainActivity;
 import com.detroitlabs.kyleofori.demoapp.adapters.RedditListAdapter;
 import com.detroitlabs.kyleofori.demoapp.backgroundthreadscheduler.RepeatingPostFetchExecutor;
 import com.detroitlabs.kyleofori.demoapp.models.RedditTextPost;
-
 import java.util.ArrayList;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class RedditListFragment extends ListFragment {
-    ArrayList<RedditTextPost> redditPostArrayList;
-    RedditListAdapter redditListAdapter;
-    RepeatingPostFetchExecutor repeater;
+    private ArrayList<RedditTextPost> redditPostArrayList;
+    private RedditListAdapter redditListAdapter;
+    private RepeatingPostFetchExecutor repeater;
     public static Handler postRefreshHandler;
 
-    public RedditListFragment() {
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        redditPostArrayList = new ArrayList<RedditTextPost>();
+        redditListAdapter = new RedditListAdapter(getActivity(), R.layout.list_item_reddit_post, redditPostArrayList);
+        repeater = new RepeatingPostFetchExecutor(getActivity().getIntent().getStringExtra(DemoAppMainActivity.SUBREDDIT_NAME));
+        updatePosts(redditPostArrayList);
+        postRefreshHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                redditListAdapter.clear();
+                redditPostArrayList = msg.getData().getParcelableArrayList("array");
+                redditListAdapter.addAll(redditPostArrayList);
+                redditListAdapter.notifyDataSetChanged();
+            }
+        };
     }
 
     @Override
@@ -44,39 +55,10 @@ public class RedditListFragment extends ListFragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-
+    public void onResume() {
+        super.onResume();
+        Log.i("onResume", "On Resume Called");
         repeater.startRepeatingPostFetchExecutor();
-    }
-
-
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        Log.i("onAttach", "On Attached Called");
-        redditPostArrayList = new ArrayList<RedditTextPost>();
-        redditListAdapter = new RedditListAdapter(getActivity(), R.layout.list_item_reddit_post, redditPostArrayList);
-        repeater = new RepeatingPostFetchExecutor(getActivity().getIntent().getStringExtra(DemoAppMainActivity.SUBREDDIT_NAME));
-        updatePosts(redditPostArrayList);
-
-        postRefreshHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                redditListAdapter.clear();
-                redditPostArrayList = msg.getData().getParcelableArrayList("array");
-                redditListAdapter.addAll(redditPostArrayList);
-                redditListAdapter.notifyDataSetChanged();
-            }
-        };
-
-    }
-
-    private void updatePosts(ArrayList<RedditTextPost> updatedPostsList) {
-        redditPostArrayList = updatedPostsList;
-        redditListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -85,11 +67,8 @@ public class RedditListFragment extends ListFragment {
         Bundle bundle = new Bundle();
         RedditTextPost redditTextPost = redditPostArrayList.get(position);
         bundle.putParcelable("clickedObject", redditTextPost);
-
         RedditPostFragment redditPostFragment = new RedditPostFragment();
         redditPostFragment.setArguments(bundle);
-
-
         getFragmentManager().beginTransaction()
         .replace(R.id.container, redditPostFragment, "post_fragment")
         .addToBackStack("post_fragment")
@@ -103,10 +82,8 @@ public class RedditListFragment extends ListFragment {
         repeater.stopRepeatingPostFetchExecutor();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.i("onResume", "On Resume Called");
-        repeater.startRepeatingPostFetchExecutor();
+    private void updatePosts(ArrayList<RedditTextPost> updatedPostsList) {
+        redditPostArrayList = updatedPostsList;
+        redditListAdapter.notifyDataSetChanged();
     }
 }
