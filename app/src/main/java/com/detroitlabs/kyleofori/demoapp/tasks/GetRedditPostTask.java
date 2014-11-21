@@ -19,12 +19,11 @@ import java.net.URL;
 /**
  * Created by kyleofori on 11/18/14.
  */
-public class GetRedditPostTask implements Runnable /*extends AsyncTask<String, Void, ArrayList<RedditTextPost>> */{
+public class GetRedditPostTask implements Runnable {
     private static final String LOG_TAG = GetRedditPostTask.class.getSimpleName();
-    RedditTextPost redditTextPost;
-    RedditJSONParser redditJSONParser = new RedditJSONParser();
-    String jsonText = null;
-    String searchTerm;
+    private RedditJSONParser redditJSONParser = new RedditJSONParser();
+    private String jsonText = null;
+    private String searchTerm;
 
     public GetRedditPostTask(String searchTerm){
      this.searchTerm = searchTerm;
@@ -86,13 +85,11 @@ public class GetRedditPostTask implements Runnable /*extends AsyncTask<String, V
                 }
             }
         }
-        try{
-            redditTextPost = redditJSONParser.convertJSONStringToRedditObjects(jsonText);
-
-        }catch(JSONException e){
+        try {
+            redditJSONParser.convertJSONStringToRedditObjects(jsonText);
+        }
+        catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
-
 }
