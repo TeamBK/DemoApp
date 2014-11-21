@@ -14,16 +14,15 @@ public class RepeatingPostFetchExecutor {
     private String subredditName;
     GetRedditPostTask getRedditPostTask;
 
-    public RepeatingPostFetchExecutor(String subredditName){
+    public RepeatingPostFetchExecutor(String subredditName) {
         this.subredditName = subredditName;
-
     }
 
     public void startRepeatingPostFetchExecutor(){
         getRedditPostTask = new GetRedditPostTask(subredditName);
         scheduledThreadPoolExecutor = (ScheduledThreadPoolExecutor)
                 Executors.newScheduledThreadPool(1);
-        scheduledThreadPoolExecutor.scheduleAtFixedRate(getRedditPostTask, 0, 5, TimeUnit.SECONDS);
+        scheduledThreadPoolExecutor.scheduleAtFixedRate(getRedditPostTask, 0, 60, TimeUnit.SECONDS);
     }
 
     public void stopRepeatingPostFetchExecutor(){

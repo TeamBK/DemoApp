@@ -14,11 +14,8 @@ import java.util.ArrayList;
 
 public class RedditListAdapter extends ArrayAdapter<RedditTextPost> {
 
-//    ArrayList<RedditTextPost> redditTextPosts;
-
     public RedditListAdapter(Context context, int resource, ArrayList<RedditTextPost> posts) {
         super(context, resource, posts);
-//        redditTextPosts = posts;
     }
 
     @Override
