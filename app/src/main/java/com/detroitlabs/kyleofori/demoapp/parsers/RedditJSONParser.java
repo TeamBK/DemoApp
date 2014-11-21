@@ -18,12 +18,21 @@ import java.util.ArrayList;
  * Created by kyleofori on 11/18/14.
  */
 public class RedditJSONParser {
-    RedditTextPost redditTextPost;
-    ArrayList<RedditTextPost> redditPostArrayList;
-    final String LOG_TAG = RedditJSONParser.class.getSimpleName();
 
-    public RedditTextPost convertJSONStringToRedditObjects(String JSONString) throws JSONException{
-        redditPostArrayList = new ArrayList<RedditTextPost>();
+    public void convertJSONStringToRedditObjects(String JSONString) throws JSONException {
+        ArrayList<RedditTextPost> redditPostArrayList = getRedditPosts(JSONString);
+
+        Handler fragmentHandler = RedditListFragment.postRefreshHandler;
+
+        Message arrayListMessage = fragmentHandler.obtainMessage();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("array", redditPostArrayList);
+        arrayListMessage.setData(bundle);
+        fragmentHandler.sendMessage(arrayListMessage);
+    }
+
+    private ArrayList<RedditTextPost> getRedditPosts(String rawJSONString) throws JSONException {
+        ArrayList<RedditTextPost> redditPostArrayList = new ArrayList<RedditTextPost>();
         final String redditDataObject = "data";
         final String redditChildrenArray = "children";
         final String redditPostAuthor = "author";
@@ -31,9 +40,11 @@ public class RedditJSONParser {
         final String redditPostText = "selftext";
         final String redditPostUrl = "url";
 
-        JSONObject jsonObject = new JSONObject(JSONString);
+        JSONObject jsonObject = new JSONObject(rawJSONString);
         JSONObject jsonDataObject = jsonObject.getJSONObject(redditDataObject);
         JSONArray jsonChildrenArray = jsonDataObject.getJSONArray(redditChildrenArray);
+
+        RedditTextPost currentRedditTextPost;
 
         for(int i = 0; i < jsonChildrenArray.length(); i++){
             JSONObject currentRedditObject = jsonChildrenArray.getJSONObject(i);
@@ -43,20 +54,11 @@ public class RedditJSONParser {
             String currentRedditPostText = currentRedditObjectData.getString(redditPostText);
             String currentRedditPostUrl = currentRedditObjectData.getString(redditPostUrl);
 
-            redditTextPost = new RedditTextPost(currentRedditPostTitle, currentRedditPostAuthor,
+            currentRedditTextPost= new RedditTextPost(currentRedditPostTitle, currentRedditPostAuthor,
                     currentRedditPostText, currentRedditPostUrl);
 
-            Log.i(LOG_TAG, redditTextPost.getAuthor());
-            redditPostArrayList.add(redditTextPost);
+            redditPostArrayList.add(currentRedditTextPost);
         }
-
-        Handler fragmentHandler = RedditListFragment.postRefreshHandler;
-        Message arrayListMessage = fragmentHandler.obtainMessage();
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("array", redditPostArrayList);
-        arrayListMessage.setData(bundle);
-        fragmentHandler.sendMessage(arrayListMessage);
-
-        return redditTextPost;
+        return redditPostArrayList;
     }
 }
