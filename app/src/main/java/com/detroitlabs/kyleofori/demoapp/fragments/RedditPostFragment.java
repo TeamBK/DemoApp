@@ -14,29 +14,21 @@ import com.detroitlabs.kyleofori.demoapp.models.RedditTextPost;
  * Created by BFineRocks on 11/17/14.
  */
 public class RedditPostFragment extends Fragment{
-    TextView txt_author;
-    TextView txt_title;
-    TextView txt_description;
-    TextView txt_url;
-    RedditTextPost redditTextPost;
-
-
-        public RedditPostFragment() {
-
-        }
+    private TextView txt_author;
+    private TextView txt_title;
+    private TextView txt_description;
+    private TextView txt_url;
+    private RedditTextPost redditTextPost;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-
             redditTextPost = getArguments().getParcelable("clickedObject");
-
             View rootView = inflater.inflate(R.layout.fragment_single_item, container, false);
             txt_author = (TextView) rootView.findViewById(R.id.fragment_single_item_author);
             txt_title = (TextView) rootView.findViewById(R.id.fragment_single_item_title);
             txt_description = (TextView) rootView.findViewById(R.id.fragment_single_item_description);
             txt_url = (TextView) rootView.findViewById(R.id.fragment_single_item_url);
-
             txt_author.setText(redditTextPost.getAuthor());
             txt_title.setText(redditTextPost.getTitle());
             if(redditTextPost.getText().equals("")){
@@ -45,7 +37,6 @@ public class RedditPostFragment extends Fragment{
             else {
                 txt_description.setText(redditTextPost.getText());
             }
-
             return rootView;
         }
 }
