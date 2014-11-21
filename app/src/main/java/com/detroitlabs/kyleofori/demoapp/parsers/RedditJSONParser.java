@@ -22,7 +22,7 @@ public class RedditJSONParser {
     ArrayList<RedditTextPost> redditPostArrayList;
     final String LOG_TAG = RedditJSONParser.class.getSimpleName();
 
-    public void convertJSONStringToRedditObjects(String JSONString) throws JSONException{
+    public RedditTextPost convertJSONStringToRedditObject(String JSONString) throws JSONException{
         redditPostArrayList = new ArrayList<RedditTextPost>();
         final String redditDataObject = "data";
         final String redditChildrenArray = "children";
@@ -45,9 +45,9 @@ public class RedditJSONParser {
 
             redditTextPost = new RedditTextPost(currentRedditPostTitle, currentRedditPostAuthor,
                     currentRedditPostText, currentRedditPostUrl);
-            redditPostArrayList.add(redditTextPost);
 
             Log.i(LOG_TAG, redditTextPost.getAuthor());
+            redditPostArrayList.add(redditTextPost);
         }
 
         Handler fragmentHandler = RedditListFragment.postRefreshHandler;
@@ -56,5 +56,16 @@ public class RedditJSONParser {
         bundle.putParcelableArrayList("array", redditPostArrayList);
         arrayListMessage.setData(bundle);
         fragmentHandler.sendMessage(arrayListMessage);
+
+        return redditTextPost;
     }
+
+    public void addToRedditPostArrayList(RedditTextPost redditTextPost) {
+
+    }
+    public ArrayList<RedditTextPost> getRedditTextPostArrayList(){
+        return redditPostArrayList;
+    }
+
+
 }
