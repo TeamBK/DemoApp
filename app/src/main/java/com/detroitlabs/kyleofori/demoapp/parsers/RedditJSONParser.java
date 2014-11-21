@@ -59,10 +59,4 @@ public class RedditJSONParser {
 
         return redditTextPost;
     }
-
-    public ArrayList<RedditTextPost> getRedditTextPostArrayList(){
-        return redditPostArrayList;
-    }
-
-
 }
