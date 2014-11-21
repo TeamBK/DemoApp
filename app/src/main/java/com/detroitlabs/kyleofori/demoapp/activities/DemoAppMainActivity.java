@@ -31,13 +31,13 @@ public class DemoAppMainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Log.d(LOG_TAG, edtSubredditName.getText().toString());
+                btnSubmit.setEnabled(false);
                 String subredditName = edtSubredditName.getText().toString();
                 Intent intent = new Intent(DemoAppMainActivity.this, SubRedditActivity.class);
                 intent.putExtra(SUBREDDIT_NAME, subredditName);
                 startActivity(intent);
-//                repeatingTask = new RepeatingPostFetchExecutor(subredditName);
-/*                GetRedditPostTask getRedditPostTask = new GetRedditPostTask();
-                getRedditPostTask.execute(subredditName);*/
+
+
             }
         });
     }
@@ -59,5 +59,12 @@ public class DemoAppMainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        btnSubmit.setEnabled(true);
+        edtSubredditName.setText("");
     }
 }

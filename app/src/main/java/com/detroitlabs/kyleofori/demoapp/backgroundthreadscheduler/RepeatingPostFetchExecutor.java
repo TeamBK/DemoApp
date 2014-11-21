@@ -16,24 +16,19 @@ public class RepeatingPostFetchExecutor {
 
     public RepeatingPostFetchExecutor(String subredditName){
         this.subredditName = subredditName;
+
+    }
+
+    public void startRepeatingPostFetchExecutor(){
         getRedditPostTask = new GetRedditPostTask(subredditName);
         scheduledThreadPoolExecutor = (ScheduledThreadPoolExecutor)
                 Executors.newScheduledThreadPool(1);
-        scheduledThreadPoolExecutor.scheduleAtFixedRate(getRedditPostTask, 0, 60, TimeUnit.SECONDS);
+        scheduledThreadPoolExecutor.scheduleAtFixedRate(getRedditPostTask, 0, 5, TimeUnit.SECONDS);
+    }
+
+    public void stopRepeatingPostFetchExecutor(){
+        scheduledThreadPoolExecutor.shutdownNow();
     }
 
 
-/*
-    Runnable periodicTask = new Runnable(){
-        @Override
-        public void run() {
-                Log.i("repeater", "I'm a repeating task, or something like that");
-            try{
-                getRedditPostTask.execute(subredditName);
-
-            }catch (Exception e){
-
-            }
-        }
-    };*/
 }
