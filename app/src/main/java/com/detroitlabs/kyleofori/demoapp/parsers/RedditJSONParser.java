@@ -57,10 +57,4 @@ public class RedditJSONParser {
         arrayListMessage.setData(bundle);
         fragmentHandler.sendMessage(arrayListMessage);
     }
-
-    public ArrayList<RedditTextPost> getRedditTextPostArrayList(){
-        return redditPostArrayList;
-    }
-
-
 }
