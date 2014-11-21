@@ -87,8 +87,7 @@ public class GetRedditPostTask implements Runnable /*extends AsyncTask<String, V
             }
         }
         try{
-            redditTextPost = redditJSONParser.convertJSONStringToRedditObject(jsonText);
-
+            redditJSONParser.convertJSONStringToRedditObjects(jsonText);
 
         }catch(JSONException e){
             e.printStackTrace();
